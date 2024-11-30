@@ -15,9 +15,9 @@ The dataset used for this analysis is the The Look E-Commerce Dataset, a publicl
 -	Represents customer profiles with demographic and traffic source data.
 ## Key Analysis and Insights
 ### 1. Revenue Trends
--	Objective: Analyze yearly revenue trends to identify growth patterns.
--	Findings:
-o	To analyze monthly revenue trends, SQL was utilized to calculate total revenue for orders with a status of 'Complete.' The query grouped transactions by month and summed their corresponding sales. 
+#### -	Objective: Analyze yearly revenue trends to identify growth patterns.
+#### -	Findings:
+-	To analyze monthly revenue trends, SQL was utilized to calculate total revenue for orders with a status of 'Complete.' The query grouped transactions by month and summed their corresponding sales. 
 The SQL query used for this analysis is as follows:
 
 ```
@@ -33,4 +33,66 @@ GROUP BY
 ORDER BY 
     month_year;
 ```
-o	Visualization : A line chart showcasing yearly revenue growth revealed peak periods.
+-	Visualization : A line chart showcasing yearly revenue growth revealed peak periods.
+  ![total revenue by year](https://github.com/user-attachments/assets/45677b19-2011-4ac3-9dd7-ebb1b89e8728)
+### 2. Best-Selling Products
+#### •	Objective: Identify top-performing products to optimize inventory and marketing strategies.
+#### •	Findings:
+-	The most frequently sold products were identified by calculating the total sales volume. 
+The SQL query used to derive these insights is as follows:
+```
+SELECT 
+    p.name AS product_name,
+    COUNT(oi.product_id) AS quantity_sold,
+    ROUND(SUM(oi.sale_price), 2) AS total_revenue
+FROM 
+    bigquery-public-data.thelook_ecommerce.order_items oi
+JOIN 
+    bigquery-public-data.thelook_ecommerce.products p
+ON 
+    oi.product_id = p.id
+WHERE 
+    oi.status = 'Complete'
+GROUP BY 
+    product_name
+ORDER BY 
+    quantity_sold DESC
+    limit 10;
+```
+-	Visualization: A bar chart of the top 10 products by sales highlighted key drivers of product success.
+  ![top 10 products](https://github.com/user-attachments/assets/ca1a4484-66eb-405b-a4d5-277ca4a6e18d)
+### 3. Market Segmentation
+#### •	Objective: Determine the largest customer segment based on age and gender to target marketing efforts effectively.
+#### •	Findings:
+-	Gender: Transactions were fairly balanced between male and female customers, indicating an equal level of engagement across genders.
+-	Age Groups: Customers aged 55+ contributed the highest revenue, suggesting they represent a crucial market segment with significant purchasing power.
+The SQL query used to analyze these demographics is provided below:
+```
+SELECT 
+    u.gender,
+    CASE 
+        WHEN u.age BETWEEN 18 AND 24 THEN '18-24'
+        WHEN u.age BETWEEN 25 AND 34 THEN '25-34'
+        WHEN u.age BETWEEN 35 AND 44 THEN '35-44'
+        WHEN u.age BETWEEN 45 AND 54 THEN '45-54'
+        ELSE '55+'
+    END AS age_group,
+    ROUND(SUM(oi.sale_price), 2) AS total_revenue
+FROM 
+    bigquery-public-data.thelook_ecommerce.order_items oi
+JOIN 
+    bigquery-public-data.thelook_ecommerce.users u
+ON 
+    oi.user_id = u.id
+WHERE 
+    oi.status = 'Complete'
+GROUP BY 
+    u.gender, age_group
+ORDER BY 
+    total_revenue DESC;
+```
+- Visualization: A segmented bar chart showing gender-based contributions and age. 
+![Market Analysis by Gender and Age](https://github.com/user-attachments/assets/d2f6bcd9-470a-4cf1-8be2-d965f860c769)
+
+
+
