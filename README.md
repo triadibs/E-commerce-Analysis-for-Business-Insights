@@ -26,7 +26,8 @@ This analysis employs a combination of quantitative methods and data visualizati
     -	Customer metrics (AOV, active customers, and returning customers).
     -	Geographic sales distribution.
     -	Product performance and return rates.
-2. Data Collection and Preparation
+2. Data Preparation
+
 The dataset used for this project is sourced from the Google BigQuery Public Data, specifically the "The Look E-commerce" dataset. This dataset captures detailed information about transactions, customers, and products in an e-commerce setting. Below is a description of the key columns:
 1.	id: A unique identifier for each transaction.
 2.	order_id: The identifier for a specific order, which may include multiple products.
@@ -38,12 +39,13 @@ The dataset used for this project is sourced from the Google BigQuery Public Dat
 8.	gender: The gender of the customer (e.g., male, female, other).
 9.	num_of_item: The quantity of items purchased in the order.
 10.	cost: The cost of the product to the business.
-11.	category: The category to which the product belongs (e.g., electronics, apparel).
+11. category: The category to which the product belongs (e.g., electronics, apparel).
 12.	name: The name of the product.
 13.	brand: The brand of the product.
 14.	age: The age of the customer.
 15.	state: The geographical state of the customer.
 This dataset provides a robust foundation for analyzing various aspects of e-commerce performance, including customer behavior, product trends, and financial metrics.
+
 ![datasaet info](https://github.com/user-attachments/assets/7636d13e-04a6-4787-afa0-f2fa2b142a38)
 ![flow](https://github.com/user-attachments/assets/e060e927-73a2-4341-a4b0-c3c9becd46ff)
 ``` SELECT 
@@ -94,29 +96,29 @@ LEFT JOIN `bigquery-public-data.thelook_ecommerce.users` u
 ```
 ### Changes Implemented:
 1.	Conversion of created_at to created_at_date:
-o	The created_at column is transformed into a DATE type using the DATE() function for better handling of date-specific analysis.
+-	The created_at column is transformed into a DATE type using the DATE() function for better handling of date-specific analysis.
 2.	Addition of revenue Column:
-o	A new column, revenue, is added, calculated using the formula: Revenue=(sale_price×num_of_item)−(cost×num_of_item)\text{Revenue} = (\text{sale\_price} \times \text{num\_of\_item}) - (\text{cost} \times \text{num\_of\_item})Revenue=(sale_price×num_of_item)−(cost×num_of_item) This column helps analyze profit margins at a granular level.
+-	A new column, revenue, is added, calculated using the formula: Revenue=(sale_price×num_of_item)−(cost×num_of_item)\text{Revenue} = (\text{sale\_price} \times \text{num\_of\_item}) - (\text{cost} \times \text{num\_of\_item})Revenue=(sale_price×num_of_item)−(cost×num_of_item) This column helps analyze profit margins at a granular level.
 3.	Creation of age_group Column:
-o	A new age_group column is introduced to classify customers into predefined age categories using a CASE statement. This categorization aids in demographic segmentation and targeted insights.
+-	A new age_group column is introduced to classify customers into predefined age categories using a CASE statement. This categorization aids in demographic segmentation and targeted insights.
 3. Analytical Techniques
--	Revenue Analysis:
-    o	Calculated total revenue and CAGR using annual revenue values.
-    o	Performed Pareto analysis to identify the top-performing categories contributing to revenue.
--	Customer Metrics:
-    o	Evaluated AOV trends over time.
-    o	Analyzed the growth of yearly active customers and the share of returning customers in total revenue.
--	Cohort and RFM Analysis:
-    o	Conducted cohort analysis to assess monthly retention trends for 2024.
-    o	Segmented customers using RFM (Recency, Frequency, Monetary) metrics to identify key customer groups (e.g., Recent Customers, Can't Lose Them).
--	Geographic Insights:
-    o	Assessed revenue contribution by region to highlight key markets.
--	Seasonal and Product Insights:
-    o	Identified seasonal trends in top apparel categories (Outerwear, Sweaters, Jeans).
-    o	Evaluated return rates by category and brand.
+    -	Revenue Analysis:
+        -	Calculated total revenue and CAGR using annual revenue values.
+        -	Performed Pareto analysis to identify the top-performing categories contributing to revenue.
+    -	Customer Metrics:
+        -	Evaluated AOV trends over time.
+        -	Analyzed the growth of yearly active customers and the share of returning customers in total revenue.
+    -	Cohort and RFM Analysis:
+        -	Conducted cohort analysis to assess monthly retention trends for 2024.
+        -	Segmented customers using RFM (Recency, Frequency, Monetary) metrics to identify key customer groups (e.g., Recent Customers, Can't Lose Them).
+    -	Geographic Insights:
+        -	Assessed revenue contribution by region to highlight key markets.
+    -	Seasonal and Product Insights:
+        -	Identified seasonal trends in top apparel categories (Outerwear, Sweaters, Jeans).
+        -	Evaluated return rates by category and brand.
 4. Visualization and Reporting
--	Used visualization tools (e.g., Pareto charts, line graphs, bar charts) to present insights clearly and effectively.
--	Summarized findings and insights in the executive summary and detailed analysis sections of the report.
+    -	Used visualization tools (e.g., Pareto charts, line graphs, bar charts) to present insights clearly and effectively.
+    -	Summarized findings and insights in the executive summary and detailed analysis sections of the report.
 
 ## Result and Analysis
 ### Revenue Growth
@@ -130,14 +132,14 @@ The revenue trend analysis from 2019 to 2024 showcases a remarkable growth traje
 1. AOV (Average Order Value):
 -	Trend: The AOV shows a slight decline from 2019 to 2024, decreasing from 172 in 2019 to 163 in 2024, which is a 5.23% drop.
 -	Interpretation:
-    o	The slight decline in AOV may indicate that customers are making purchases with lower transaction values or there is a shift in product preferences.
-    o	Other contributing factors could include the implementation of discounts or changes in pricing strategies over the years.
+    -	The slight decline in AOV may indicate that customers are making purchases with lower transaction values or there is a shift in product preferences.
+    -	Other contributing factors could include the implementation of discounts or changes in pricing strategies over the years.
 ________________________________________
 2. Yearly Active Customers:
 -	Trend: The number of active customers has grown significantly, from 2,000 in 2019 to 57,000 in 2024, an increase of over 28 times in just six years.
 -	Interpretation:
-    o	This rapid growth in customer base reflects strong business expansion, effective marketing strategies, and increased brand awareness.
-    o	It likely indicates a focus on aggressive customer acquisition efforts.
+    -	This rapid growth in customer base reflects strong business expansion, effective marketing strategies, and increased brand awareness.
+    -	It likely indicates a focus on aggressive customer acquisition efforts.
 ________________________________________
 3. Relationship Between AOV and Yearly Active Customers:
 -	While the number of active customers has grown exponentially, AOV has not shown a proportional increase. This suggests the business has prioritized increasing transaction volume (customer quantity) over raising the average transaction value.
@@ -145,11 +147,11 @@ ________________________________________
 ________________________________________
 4. Challenges and Opportunities:
 -	Challenges:
-    o	A stagnant or declining AOV could impact profit margins if customer acquisition costs rise or operational costs increase.
-    o	Ensuring that rapid customer growth translates into sustainable profitability is critical.
+    -	A stagnant or declining AOV could impact profit margins if customer acquisition costs rise or operational costs increase.
+    -	Ensuring that rapid customer growth translates into sustainable profitability is critical.
 -	Opportunities:
-    o	A large customer base provides opportunities to enhance customer loyalty, drive repeat purchases, and implement strategies to boost AOV.
-    o	Segmentation of the customer base could allow for targeted offers and promotions tailored to specific customer needs.
+    -	A large customer base provides opportunities to enhance customer loyalty, drive repeat purchases, and implement strategies to boost AOV.
+    -	Segmentation of the customer base could allow for targeted offers and promotions tailored to specific customer needs.
 ________________________________________
 5. Recommendations:
     1.	Customer Segmentation: Analyze the customer base to identify groups (e.g., new vs. returning customers) and offer tailored products or bundles to boost AOV.
@@ -204,8 +206,8 @@ The data shows the monthly distribution of new customers and returning customers
     o	The June cohort has the highest Month 2 retention rate (8.81%) among early cohorts.
 2. Anomalies in Retention
 -	September and October Cohorts:
-    o	The September cohort has an exceptionally high retention rate in Month 2 (12.52%), far exceeding earlier cohorts. However, this retention sharply declines in later months (9.67% in Month 3, with no data for subsequent months).
-    o	Similarly, the October cohort exhibits the highest initial retention rate (14.58%) but lacks data beyond Month 2.
+    -	The September cohort has an exceptionally high retention rate in Month 2 (12.52%), far exceeding earlier cohorts. However, this retention sharply declines in later months (9.67% in Month 3, with no data for subsequent months).
+    -	Similarly, the October cohort exhibits the highest initial retention rate (14.58%) but lacks data beyond Month 2.
 -	November Cohort:
     No retention data beyond Month 1, as it is still within the acquisition period.
 -	The December cohort cannot be fully analyzed due to the short time frame (data only reflects a few days).
@@ -213,20 +215,20 @@ Interpretation:
 The September and October cohorts likely benefited from strong acquisition campaigns, possibly tied to specific marketing efforts or seasonal promotions. However, the retention decline suggests a need for follow-up engagement strategies to sustain user activity.
 3. Patterns of Retention Decline
 -	Early Cohorts (January–June):
-    o	The drop-off is relatively moderate, with retention stabilizing around 4–5% in later months.
-    o	This stability indicates effective retention strategies but also highlights potential for further improvement in user engagement.
+    -	The drop-off is relatively moderate, with retention stabilizing around 4–5% in later months.
+    -	This stability indicates effective retention strategies but also highlights potential for further improvement in user engagement.
 -	Later Cohorts (July–October):
-    o	Higher initial retention rates (8–14%) suggest improvements in onboarding or engagement strategies during these periods.
+    -	Higher initial retention rates (8–14%) suggest improvements in onboarding or engagement strategies during these periods.
 Key Insights & Recommendations
     1.	Sustain Engagement for High-Performing Cohorts:
-        o	Leverage insights from July–October cohorts to understand the factors driving their high initial retention (e.g., onboarding processes, targeted campaigns).
-        o	Implement strategies to maintain retention beyond Month 3, such as loyalty programs, reactivation emails, or exclusive offers.
+        -	Leverage insights from July–October cohorts to understand the factors driving their high initial retention (e.g., onboarding processes, targeted campaigns).
+        -	Implement strategies to maintain retention beyond Month 3, such as loyalty programs, reactivation emails, or exclusive offers.
     2.	Focus on Long-Term Retention:
-        o	For earlier cohorts (e.g., January–June), where retention stabilizes at 4–5%, consider enhancing re-engagement campaigns to boost long-term activity.
+        -	For earlier cohorts (e.g., January–June), where retention stabilizes at 4–5%, consider enhancing re-engagement campaigns to boost long-term activity.
     3.	Address Retention Drop-Off in Later Cohorts:
-        o	September and October cohorts show steep declines after Month 2. Focus on personalized engagement strategies during the critical second and third months to minimize drop-off.
+        -	September and October cohorts show steep declines after Month 2. Focus on personalized engagement strategies during the critical second and third months to minimize drop-off.
     4.	Evaluate Marketing Efforts:
-        o	The surge in Month 1 retention for later cohorts (e.g., October with 14.58%) indicates successful acquisition campaigns. Replicate these efforts while pairing them with sustained post-acquisition engagement strategies.
+        -	The surge in Month 1 retention for later cohorts (e.g., October with 14.58%) indicates successful acquisition campaigns. Replicate these efforts while pairing them with sustained post-acquisition engagement strategies.
 
 ### Customer Segmentation RFM Analysis
 ![rfm](https://github.com/user-attachments/assets/c9b5b517-83b0-4ce1-b5d3-8c9095f002b0)
@@ -377,27 +379,27 @@ Key Observations:
     -	Approximately 80% of the revenue is driven by the first 67 brands from 267 brands.
 2. Key Contributors
     -	Top Performers (High Revenue):
-        o	Carhartt ($52K, the largest contributor).
-        o	Arc'teryx ($34K).
-        o	Canada Goose ($29K).
-        o	These three brands alone account for a significant portion of the revenue, showing their importance in the overall portfolio.
-        o	Brands like Mountain Hardwear ($24K), Columbia ($21K), and The North Face ($17K) contribute moderately to total revenue. These could represent growth opportunities with the right strategies.
+        - Carhartt ($52K, the largest contributor).
+        - Arc'teryx ($34K).
+        - Canada Goose ($29K).
+        - These three brands alone account for a significant portion of the revenue, showing their importance in the overall portfolio.
+        - Brands like Mountain Hardwear ($24K), Columbia ($21K), and The North Face ($17K) contribute moderately to total revenue. These could represent growth opportunities with the right strategies.
     -	Mid-Level Performers:
-        o	Brands like Dickies, Timberland, and Faconnable contribute minimally, with revenues around $4K.
+        - Brands like Dickies, Timberland, and Faconnable contribute minimally, with revenues around $4K.
 3. Areas of Focus
 -	Top Brands Optimization:
-        o	Focus on managing the leading brands like Carhartt, Arc'teryx, and Canada Goose to sustain or further boost their contributions. This includes ensuring adequate stock, enhancing marketing campaigns, and leveraging their popularity.
+        - Focus on managing the leading brands like Carhartt, Arc'teryx, and Canada Goose to sustain or further boost their contributions. This includes ensuring adequate stock, enhancing marketing campaigns, and leveraging their popularity.
 -	Explore Growth for Mid-Tier Brands:
-        o	Mid-level brands (Mountain Hardwear, Columbia, The North Face) have room for growth. They already contribute significantly but could be optimized further to increase their market share.
+        - Mid-level brands (Mountain Hardwear, Columbia, The North Face) have room for growth. They already contribute significantly but could be optimized further to increase their market share.
 -	Reassess Bottom Brands:
-        o	Brands at the far right with low revenue contributions might need evaluation. Consider strategies to improve their performance or decide if resources should be reallocated to higher-performing brands.
+        - Brands at the far right with low revenue contributions might need evaluation. Consider strategies to improve their performance or decide if resources should be reallocated to higher-performing brands.
 4. Strategic Recommendations
 -	Leverage Top Brands:
-    o	Ensure that the top contributors remain strong by focusing on key sales channels, maintaining strong customer demand, and managing inventory efficiently.
+    - Ensure that the top contributors remain strong by focusing on key sales channels, maintaining strong customer demand, and managing inventory efficiently.
 -	Nurture Growth in Middle-Tier Brands:
-    o	These brands already have decent traction, and with additional focus targeted promotions, improved positioning), they could potentially move into the top-tier category.
+    - These brands already have decent traction, and with additional focus targeted promotions, improved positioning), they could potentially move into the top-tier category.
 -	Review Low Performers:
-    o	Assess why these brands are underperforming. Is it due to low demand, pricing, or lack of marketing? If improving them isn’t viable, consider replacing them with more promising alternatives.
+    - Assess why these brands are underperforming. Is it due to low demand, pricing, or lack of marketing? If improving them isn’t viable, consider replacing them with more promising alternatives.
 
 #### SWEATERS
 ![pareto sweater](https://github.com/user-attachments/assets/307a9ce7-3ac2-4615-a72c-fc103c641706)
@@ -433,43 +435,43 @@ ________________________________________
 ## Strategic Recommendations
 ### Revenue Optimization
 1.	Focus on High-Performing Categories:
-    o	Allocate resources to maximize revenue from top-performing categories through targeted marketing and inventory optimization.
+    - Allocate resources to maximize revenue from top-performing categories through targeted marketing and inventory optimization.
 2.	Support Growth in Emerging Categories:
-    o	Strengthen branding and promotional efforts to elevate mid-tier categories into top performers.
+    - Strengthen branding and promotional efforts to elevate mid-tier categories into top performers.
 3.	Streamline Underperforming Categories:
-     o	Reevaluate low-contribution categories to determine growth potential or consider reallocating resources to more profitable segments.
+    - Reevaluate low-contribution categories to determine growth potential or consider reallocating resources to more profitable segments.
 
 ### Customer Retention and Acquisition:
 1.	Boost Retention via Loyalty Programs:
-        -	Strengthen loyalty initiatives to enhance repeat purchases and retain high-value customers (e.g., Champions from RFM segmentation).
+    - Strengthen loyalty initiatives to enhance repeat purchases and retain high-value customers (e.g., Champions from RFM segmentation).
 2.	Expand New Customer Base:
-        -	Focus acquisition campaigns on untapped segments using referral programs and first-time purchase discounts.
+    - Focus acquisition campaigns on untapped segments using referral programs and first-time purchase discounts.
 3.	Mitigate Retention Drop-Off:
-        -	Develop personalized engagement strategies for customers with declining retention to maintain long-term activity.
+    - Develop personalized engagement strategies for customers with declining retention to maintain long-term activity.
         
 ### Product and Category Strategy:
 1.	Maximize Dominant Categories:
-    -	Invest in high-performing categories like Outerwear & Coats, Jeans, and Sweaters with seasonal promotions and product line diversification.
+    - Invest in high-performing categories like Outerwear & Coats, Jeans, and Sweaters with seasonal promotions and product line diversification.
 2.	Strategic Focus on Growth Categories:
-    -	Target mid-tier categories like Hoodies & Sweatshirts and Swim with short-term campaigns to increase their share in total revenue.
+    - Target mid-tier categories like Hoodies & Sweatshirts and Swim with short-term campaigns to increase their share in total revenue.
 3.	Evaluate Low-Contribution Categories:
-    -	For categories with minimal impact, consider reducing inventory or discontinuing to optimize resources.
+    - For categories with minimal impact, consider reducing inventory or discontinuing to optimize resources.
         
 ### Operational Excellence:
 1.	Analyze AOV (Average Order Value):
-    -	Introduce premium product lines and targeted bundles to increase transaction values.
-    -	Use behavioral insights to craft personalized offers that encourage larger purchases.
+    - Introduce premium product lines and targeted bundles to increase transaction values.
+    - Use behavioral insights to craft personalized offers that encourage larger purchases.
 2.	Improve Order Completion Rates:
-    -	Continue optimizing operational processes to maintain completion rates and reduce cancellations and returns.
+    - Continue optimizing operational processes to maintain completion rates and reduce cancellations and returns.
 3.	Leverage Geographical Insights:
-    -    Prioritize investments in top-performing regions like China and United States, while exploring growth potential in emerging markets like Brazil.
+    - Prioritize investments in top-performing regions like China and United States, while exploring growth potential in emerging markets like Brazil.
         
 ### Data-Driven Decision Making:
 1.	Leverage Analytics for Strategy:
-    -	Use RFM segmentation insights to create targeted campaigns for each customer group.
-    -	Incorporate decomposition tree analysis to identify key drivers of revenue, returns, and completions.
+    - Use RFM segmentation insights to create targeted campaigns for each customer group.
+    - Incorporate decomposition tree analysis to identify key drivers of revenue, returns, and completions.
 2.	Monitor Performance Continuously:
-    -	Regularly track metrics (e.g., retention, AOV, and customer demographics) to refine strategies dynamically.
+   - Regularly track metrics (e.g., retention, AOV, and customer demographics) to refine strategies dynamically.
 ## Conclusion
 These strategic recommendations provide actionable steps to optimize performance across brands, categories, and customer segments while ensuring sustainable growth. By focusing on top contributors, nurturing mid-tier opportunities, and leveraging data-driven insights, the business can strengthen its market position and scale efficiently.
 
